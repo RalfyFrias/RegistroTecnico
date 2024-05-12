@@ -1,0 +1,83 @@
+﻿@page "/Index"
+@inject TecnicoService TecnicoService
+@inject NavigationManager navigationManager
+@rendermode InteractiveServer
+
+<div class="card-header bg-primary text-white text-center py-2 rounded">
+    <h3 style="font-weight: bold;" class="mb-0 font-weight-bold">Consulta Técnicos</h3>
+</div>
+<div class="card-body">
+    <div class="row">
+        <div class="col-md-9"></div>
+        <div class="col-md-3 text-end">
+            <a href="/Create" class="btn btn-success" type="button">
+                <span class="bi bi-floppy-nav-menu" aria-hidden="Create"></span> Crear
+            </a>
+        </div>
+    </div>
+</div>
+<div class="table-responsive">
+    <table class="table  table-hover text-center">
+        <thead class="bg-primary text-white">
+            <tr>
+                <th>TécnicoId</th>
+                <th>Nombre</th>
+                <th>SueldoHora</th>
+                <th>Detalle</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var tecnico in ListaTecnicos)
+            {
+                <tr>
+                    <td>@tecnico.TecnicoId</td>
+                    <td>@tecnico.Nombre</td>
+                    <td>@tecnico.Sueldohora</td>
+                    <td>
+                        <button type="button" class="btn btn-link btn-detalle" @onclick="() => IrDetalle(tecnico.TecnicoId)">
+                            <span class="bi bi-info-circle-fill" style="font-size: 2rem;"></span>
+                        </button>
+                    </td>
+                    <td>
+                        <a href="/Editar/@tecnico.TecnicoId" style="border: none; background-color: transparent;" class="btn-editar">
+                            <span class="bi bi-pencil-square" style="font-size: 2rem;"></span>
+                        </a>
+                    </td>
+                    <td>
+                        <button type="button" class="bi bi-x-circle red" style="color: red; border: none; background-color: transparent; font-size: 2rem;" @onclick="() => IrEliminar(tecnico.TecnicoId)">
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<div class="card-footer text-end">
+    <p> Total de Tecnicos: @ListaTecnicos.Count </p>
+</div>
+
+@code {
+    public List<Tecnicos> ListaTecnicos = new List<Tecnicos>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        ListaTecnicos = await TecnicoService.Listar(c => c.TecnicoId > 0);
+    }
+
+    public void IrEditar(int tecnicoId)
+    {
+        navigationManager.NavigateTo($"/Edit/{tecnicoId}");
+    }
+
+    public void IrDetalle(int tecnicoId)
+    {
+        navigationManager.NavigateTo($"/Details/{tecnicoId}");
+    }
+
+    public void IrEliminar(int tecnicoId)
+    {
+        navigationManager.NavigateTo($"/Tecnico/Delete/{tecnicoId}");
+    }
+}
