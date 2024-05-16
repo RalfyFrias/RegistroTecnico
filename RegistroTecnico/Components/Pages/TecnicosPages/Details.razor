@@ -1,4 +1,4 @@
-﻿@page "/Details/{TecnicoId:int}"
+﻿@page "/Tecnico/Details {TecnicoId:int}"
 @inject TecnicoService tecnicoService
 @inject NavigationManager navigationManager
 @rendermode InteractiveServer
@@ -46,7 +46,7 @@ else
         tecnico = await tecnicoService.Buscar(TecnicoId);
     }
 
-    public void Volver()
+    public async Task Volver()
     {
         navigationManager.NavigateTo("/Index");
     }

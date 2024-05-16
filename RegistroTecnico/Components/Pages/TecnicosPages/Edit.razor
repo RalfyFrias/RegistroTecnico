@@ -1,5 +1,5 @@
-﻿@page "/Edit"
-@page "/Editar/{TecnicoId:int}"
+﻿@page "/Tecnico/Edit"
+@page "/Tecnico/Edit/{TecnicoId:int}"
 @inject TecnicoService tecnicoService
 @inject NavigationManager navigationManager
 @rendermode InteractiveServer
@@ -12,8 +12,9 @@
         </div>
 
         <div class="card-body">
-            <!-- TecnicoId -->
+            
             <div class="row">
+
                 <div class="col-md-6 mb-3">
                     <label for="TecnicoId" class="form-label">T&eacute;cnicoId:</label>
                     <div class="input-group">
@@ -25,7 +26,6 @@
                 </div>
             </div>
 
-            <!-- Names -->
             <div class="mb-3">
                 <label for="Nombres" class="form-label">Nombre:</label>
                 <InputText @bind-Value="tecnico.Nombre" class="form-control" />
@@ -36,7 +36,6 @@
                 }
             </div>
 
-            <!-- SueldoHora -->
             <div class="mb-3">
                 <label> SueldoHora </label>
                 <InputNumber @bind-Value="tecnico.Sueldohora" class="form-control" />
@@ -68,7 +67,7 @@
         }
     }
 
-    public void Nuevo()
+    public async Task  Nuevo()
     {
         tecnico = new Tecnicos();
         Existe = false;
@@ -109,9 +108,9 @@
         Nuevo();
     }
 
-    private void Retroceder()
+    private async Task Retroceder()
     {
-        navigationManager.NavigateTo("/Index");
+        navigationManager.NavigateTo("/Tecnico/Index");
     }
 
     public async Task<bool> Validar()

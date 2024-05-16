@@ -12,7 +12,7 @@
         </div>
 
         <div class="card-body">
-            <!-- TecnicoId -->
+            @* TecnicoId *@
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label for="TecnicoId" class="form-label">T&eacute;cnicoId:</label>
@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <!-- Nombres -->
+               @* Nombre *@
             <div class="mb-3">
                 <label for="Nombres" class="form-label">Nombre:</label>
                 <InputText @bind-Value="tecnico.Nombre" class="form-control" />
@@ -36,7 +36,7 @@
                 }
             </div>
 
-            <!-- SueldoHora -->
+              @* SueldoHora *@
             <div class="mb-3">
                 <label> SueldoHora </label>
                 <InputNumber @bind-Value="tecnico.Sueldohora" class="form-control" />

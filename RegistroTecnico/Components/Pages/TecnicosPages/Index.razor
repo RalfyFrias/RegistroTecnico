@@ -65,18 +65,18 @@
         ListaTecnicos = await TecnicoService.Listar( t => t.TecnicoId > 0);
     }
 
-    public void IrEditar(int tecnicoId)
+    public async Task IrEditar(int tecnicoId)
     {
-        navigationManager.NavigateTo($"/Edit/{tecnicoId}");
+        navigationManager.NavigateTo($"/Tecnico/Edit{tecnicoId}");
     }
 
-    public void IrDetalle(int tecnicoId)
+    public async Task IrDetalle(int tecnicoId)
     {
-        navigationManager.NavigateTo($"/Details/{tecnicoId}");
+        navigationManager.NavigateTo($"/Tecnico/Details{tecnicoId}");
     }
 
-    public void IrEliminar(int tecnicoId)
+    public async Task IrEliminar(int tecnicoId)
     {
-        navigationManager.NavigateTo($"/Tecnico/Delete/{tecnicoId}");
+        navigationManager.NavigateTo($"/Tecnico/Delete{tecnicoId}");
     }
 }
