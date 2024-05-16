@@ -1,4 +1,4 @@
-﻿@page "/Tecnico/Delete/{TecnicoId:int}"
+﻿@page "/Tecnico/Delete {TecnicoId:int}"
 @inject TecnicoService tecnicoService
 @rendermode InteractiveServer
 @inject NavigationManager navigationManager
@@ -81,8 +81,8 @@ else
         }
     }
 
-    public void Volver()
+    public async Task Volver()
     {
-        navigationManager.NavigateTo("/Index");
+        navigationManager.NavigateTo("Tecnico/Index");
     }
 }
