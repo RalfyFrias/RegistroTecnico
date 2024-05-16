@@ -1,4 +1,4 @@
-﻿@page "/Create"
+﻿@page "/Tecnico/Create"
 @inject TecnicoService tecnicoService
 @inject NavigationManager navigationManager
 @rendermode InteractiveServer
@@ -94,7 +94,7 @@
         if (guardo)
         {
             Nuevo();
-            navigationManager.NavigateTo("/Index");
+            navigationManager.NavigateTo("Tecnico/Index");
         }
     }
 
@@ -106,7 +106,7 @@
 
     private void Retroceder()
     {
-        navigationManager.NavigateTo("/Index");
+        navigationManager.NavigateTo("Tecnico/Index");
     }
 
     public async Task<bool> Validar()
