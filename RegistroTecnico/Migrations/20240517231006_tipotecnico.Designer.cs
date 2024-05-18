@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RegistroTecnico.DAL;
 
@@ -10,9 +11,11 @@ using RegistroTecnico.DAL;
 namespace RegistroTecnico.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20240517231006_tipotecnico")]
+    partial class tipotecnico
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
@@ -31,27 +34,9 @@ namespace RegistroTecnico.Migrations
                         .IsRequired()
                         .HasColumnType("REAL");
 
-                    b.Property<int>("TipoId")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("TecnicoId");
 
                     b.ToTable("Tecnicos");
-                });
-
-            modelBuilder.Entity("RegistroTecnico.Models.Tipotecnico", b =>
-                {
-                    b.Property<int>("TipoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("TipoId");
-
-                    b.ToTable("TipoTecnico");
                 });
 #pragma warning restore 612, 618
         }

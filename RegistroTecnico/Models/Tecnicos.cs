@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RegistroTecnico.Models
 {
@@ -14,6 +15,8 @@ namespace RegistroTecnico.Models
         [Required(ErrorMessage = "El Campo Descripción es obligatorio")]
         public float? Sueldohora { get; set; }
 
+        [ForeignKey("TipoTecnico")]
+        public int TipoId { get; set; }
 
 
     }

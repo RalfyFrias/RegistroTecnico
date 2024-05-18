@@ -3,7 +3,6 @@ using RegistroTecnico.Models;
 using RegistroTecnico.DAL;
 using System.Linq.Expressions;
 
-
 namespace RegistroTecnico.Service;
 
 public class TecnicoService
@@ -15,22 +14,20 @@ public class TecnicoService
         Contexto = contexto;
     }
 
-    //Metodo Existente
+    // Método Existente
     public async Task<bool> Existe(int TecnicoId)
     {
         return await Contexto.Tecnicos.AnyAsync(p => p.TecnicoId == TecnicoId);
-
     }
 
-    //Metodo Insertar
+    // Método Insertar
     private async Task<bool> Insertar(Tecnicos tecnico)
     {
         Contexto.Tecnicos.Add(tecnico);
         return await Contexto.SaveChangesAsync() > 0;
     }
 
-    // Metodo Modificar
-
+    // Método Modificar
     private async Task<bool> Modificar(Tecnicos tecnico)
     {
         Contexto.Tecnicos.Update(tecnico);
@@ -39,27 +36,28 @@ public class TecnicoService
         return modificado;
     }
 
-    // Metodo guardar
+    // Método Guardar
     public async Task<bool> Guardar(Tecnicos tecnico)
     {
         if (!await Existe(tecnico.TecnicoId))
             return await Insertar(tecnico);
         else
-        {
             return await Modificar(tecnico);
-        }
     }
 
-    // Metodo eliminar
-
+    // Método Eliminar
     public async Task<bool> Eliminar(int id)
     {
-        var Tecnicos = await Contexto.Tecnicos.Where(P => P.TecnicoId == id).ExecuteDeleteAsync();
-        return Tecnicos > 0;
+        var tecnico = await Contexto.Tecnicos.FindAsync(id);
+        if (tecnico != null)
+        {
+            Contexto.Tecnicos.Remove(tecnico);
+            return await Contexto.SaveChangesAsync() > 0;
+        }
+        return false;
     }
 
-    //Metodo Buscar
-
+    // Método Buscar
     public async Task<Tecnicos?> Buscar(int id)
     {
         return await Contexto.Tecnicos
@@ -67,13 +65,12 @@ public class TecnicoService
             .FirstOrDefaultAsync(P => P.TecnicoId == id);
     }
 
-    //Metodo listar
-
+    // Método Listar
     public async Task<List<Tecnicos>> Listar(Expression<Func<Tecnicos, bool>> criterio)
     {
-        return Contexto.Tecnicos
+        return await Contexto.Tecnicos
             .AsNoTracking()
             .Where(criterio)
-            .ToList();
+            .ToListAsync();
     }
 }

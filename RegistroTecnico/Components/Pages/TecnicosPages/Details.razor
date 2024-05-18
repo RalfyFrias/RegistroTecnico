@@ -1,4 +1,5 @@
-﻿@page "/Tecnico/Details {TecnicoId:int}"
+﻿@page "/Tecnico/Details"
+@page "/Tecnico/Details/{TecnicoId:int}"
 @inject TecnicoService tecnicoService
 @inject NavigationManager navigationManager
 @rendermode InteractiveServer
@@ -9,7 +10,7 @@
 {
     <div class="container">
         <div class="card shadow-header">
-            <div class="card-header bg-primary text-white text-center py-2 rounded">
+            <div class="card-header  bg-primary text-white text-center py-2 rounded">
                 <h3 class="text-center"><strong>Detalles del técnico</strong></h3>
             </div>
             <div class="container">
@@ -20,6 +21,7 @@
                                 <li><strong>TécnicoId:</strong> @tecnico.TecnicoId</li>
                                 <li><strong>Nombre:</strong> @tecnico.Nombre</li>
                                 <li><strong>SueldoHora:</strong> @tecnico.Sueldohora</li>
+                                <li><strong>Tipo Técnico:</strong> @tecnico.TipoId</li>
                             </ul>
                         </div>
                     </div>
@@ -39,15 +41,23 @@ else
 @code {
     [Parameter]
     public int TecnicoId { get; set; }
-    public Tecnicos tecnico { get; set; }
+    public Tecnicos? tecnico { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        tecnico = await tecnicoService.Buscar(TecnicoId);
+        try
+        {
+            tecnico = await tecnicoService.Buscar(TecnicoId);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error loading details: {ex.Message}");
+            navigationManager.NavigateTo("/Tecnico/index");
+        }
     }
 
-    public async Task Volver()
+    public void Volver()
     {
-        navigationManager.NavigateTo("/Index");
+        navigationManager.NavigateTo("/Tecnico/index");
     }
 }
