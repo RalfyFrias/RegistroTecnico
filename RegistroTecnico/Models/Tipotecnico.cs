@@ -2,7 +2,7 @@
 
 namespace RegistroTecnico.Models
 {
-    public class Tipotecnico
+    public class Tipotecnicos
     {
         [Key]
 
