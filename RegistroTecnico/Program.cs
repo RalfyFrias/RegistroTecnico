@@ -21,7 +21,7 @@ namespace RegistroTecnico
             var ConStr = builder.Configuration.GetConnectionString("ConStr");
             builder.Services.AddDbContext<Contexto>(Options => Options.UseSqlite(ConStr));
             builder.Services.AddScoped<TecnicoService>();
-            builder.Services.AddScoped<TipoTecnicoService>();
+            builder.Services.AddScoped<TiposTecnicosService>();
 
             builder.Services.AddBlazorBootstrap();
 
