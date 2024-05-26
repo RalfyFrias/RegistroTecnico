@@ -12,7 +12,7 @@ namespace RegistroTecnico.DAL
 		: base (options) { }
 
 	  public DbSet<Tecnicos> Tecnicos { get; set;}
-      public DbSet<Tipotecnico> TipoTecnico { get; set; }
-
+      public DbSet<Tipostecnicos> TiposTecnicos { get; set; }
+	  public DbSet<IncentivosTecnicos> incentivosTecnicos { get; set; }
     }
 } 
