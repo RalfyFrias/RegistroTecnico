@@ -1,6 +1,6 @@
-﻿@page "/TipoTecnico/Delete/{TipoId:int}"
+﻿@page "/TipoTecnico/Delete/"
 
-@inject TipoTecnicoService tipoTecnicoService
+@inject TiposTecnicoService tiposTecnicoService
 @inject NavigationManager navigationManager
 @rendermode InteractiveServer
 
@@ -52,13 +52,13 @@
 @code {
     [Parameter]
     public int TipoId { get; set; }
-    public Tipotecnico? tipotecnicos { get; set; } = new Tipotecnico();
+    public Tipostecnicos? tipotecnicos { get; set; } = new Tipostecnicos();
 
     protected override async Task OnInitializedAsync()
     {
         if (TipoId != 0)
         {
-            tipotecnicos = await tipoTecnicoService.Buscar(TipoId);
+            tipotecnicos = await tiposTecnicoService.Buscar(TipoId);
         }
     }
 
@@ -69,7 +69,7 @@
             return;
         }
 
-        if (await tipoTecnicoService.Eliminar(TipoId))
+        if (await tiposTecnicoService.Eliminar(TipoId))
         {
             Volver();
         }
