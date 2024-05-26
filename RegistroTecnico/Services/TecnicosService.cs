@@ -62,13 +62,13 @@ public class TecnicoService
     {
         return await Contexto.Tecnicos
             .AsNoTracking()
-            .FirstOrDefaultAsync(P => P.TecnicoId == id);
+            .FirstOrDefaultAsync(t => t.TecnicoId == id);
     }
 
     // Método Listar
     public async Task<List<Tecnicos>> Listar(Expression<Func<Tecnicos, bool>> criterio)
     {
-        return await Contexto.Tecnicos
+        return await Contexto.Tecnicos.Include(t => t.Tipotecnicos)
             .AsNoTracking()
             .Where(criterio)
             .ToListAsync();
