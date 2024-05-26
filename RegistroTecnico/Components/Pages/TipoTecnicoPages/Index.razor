@@ -1,5 +1,5 @@
 ﻿@page "/TipoTecnicos/index"
-@inject TipoTecnicoService tipoTecnicoService
+@inject TiposTecnicosService tiposTecnicosService
 @inject NavigationManager navigationManager
 
 <PageTitle>Consulta Tipos Técnicos</PageTitle>
@@ -31,7 +31,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var tecnico in ListaTipoTecnicos)
+                    @foreach (var tecnico in ListaTiposTecnicos)
                     {
                         <tr>
                             <td>@tecnico.TipoId</td>
@@ -57,16 +57,16 @@
             </table>
         </div>
         <div class="card-footer text-start">
-            <p>Total de Tipos Técnicos: @ListaTipoTecnicos.Count</p>
+            <p>Total de Tipos Técnicos: @ListaTiposTecnicos.Count</p>
         </div>
     </div>
 </div>
 
 @code {
-    public List<Tipotecnico> ListaTipoTecnicos = new List<Tipotecnico>();
+    public List<Tipostecnicos> ListaTiposTecnicos = new List<Tipostecnicos>();
 
     protected override async Task OnInitializedAsync()
     {
-        ListaTipoTecnicos = await tipoTecnicoService.Listar(t => t.TipoId > 0);
+        ListaTiposTecnicos = await tiposTecnicosService.Listar(t => t.TipoId > 0);
     }
 }
