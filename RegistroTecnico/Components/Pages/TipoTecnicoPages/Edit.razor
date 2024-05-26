@@ -50,7 +50,7 @@
 @code {
     [Parameter]
     public int TipoId { get; set; }
-    public Tipotecnico tipotecnicos { get; set; } = new Tipotecnico();
+    public Tipostecnicos tipostecnicos { get; set; } = new Tipostecnicos();
     private bool Existe = false;
 
     protected override async Task OnInitializedAsync()
@@ -63,18 +63,18 @@
 
     public async Task Nuevo()
     {
-        tipotecnicos = new Tipotecnico();
+        tipostecnicos = new Tipostecnicos();
         Existe = false;
     }
 
     public async Task Buscar()
     {
         Existe = false;
-        var tipoEncontrado = await tipoTecnicoService.Buscar(TipoId);
+        var tipostecnicosEncontrado = await tipoTecnicoService.Buscar(TipoId);
 
-        if (tipoEncontrado != null)
+        if (tipostecnicosEncontrado != null)
         {
-            tipotecnicos = tipoEncontrado;
+            tipostecnicos = tipostecnicosEncontrado;
         }
         else
         {
@@ -89,7 +89,7 @@
             return;
         }
 
-        var guardado = await tipoTecnicoService.Guardar(tipotecnicos);
+        var guardado = await tipoTecnicoService.Guardar(tipostecnicos); 
         if (guardado)
         {
             Nuevo();
