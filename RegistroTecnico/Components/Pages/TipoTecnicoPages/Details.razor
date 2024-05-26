@@ -1,5 +1,5 @@
 ﻿@page "/TipoTecnico/Details/"
-@inject TipoTecnicoService tipoTecnicoService
+@inject TiposTecnicosService tiposTecnicosService
 @inject NavigationManager navigationManager
 @rendermode InteractiveServer
 
@@ -37,14 +37,13 @@ else
 
 @code {
     [Parameter]
-    public int TipoId { get; set; }
-    private Tipotecnico tipotecnico;
+    public int tipoId { get; set; }
+    private Tipostecnicos tipotecnico;
 
     protected override async Task OnInitializedAsync()
     {
-        tipotecnico = await tipoTecnicoService.Buscar(TipoId);
+        tipotecnico = await tipoTecnicoService.Buscar(tipoId);
     }
-
     private async Task Volver()
     {
         navigationManager.NavigateTo("/TipoTecnicos/index");
