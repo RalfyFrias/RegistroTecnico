@@ -21,7 +21,7 @@
                                 <li><strong>TécnicoId:</strong> @tecnico.TecnicoId</li>
                                 <li><strong>Nombre:</strong> @tecnico.Nombre</li>
                                 <li><strong>SueldoHora:</strong> @tecnico.Sueldohora</li>
-                                <li><strong>Tipo Técnico:</strong> @tecnico.TipoId</li>
+                                <li><strong>Tipo Técnico:</strong> @tipoDescripcion</li>
                             </ul>
                         </div>
                     </div>
@@ -42,17 +42,14 @@ else
     [Parameter]
     public int TecnicoId { get; set; }
     public Tecnicos? tecnico { get; set; }
+    public string tipoDescripcion { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        try
+        tecnico = await tecnicoService.Buscar(TecnicoId);
+        if(tecnico != null )
         {
-            tecnico = await tecnicoService.Buscar(TecnicoId);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine($"Error loading details: {ex.Message}");
-            navigationManager.NavigateTo("/Tecnico/index");
+            //var tipo = await tipoTecnicoService
         }
     }
 

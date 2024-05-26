@@ -1,6 +1,6 @@
 ﻿@page "/Tecnico/Create"
 @inject TecnicoService tecnicoService
-@inject TipoTecnicoService tipoTecnicoService
+@inject TiposTecnicosService tipoTecnicoService
 @inject NavigationManager navigationManager
 @rendermode InteractiveServer
 
@@ -75,7 +75,7 @@
     public int TecnicoId { get; set; }
 
     public Tecnicos tecnico { get; set; } = new Tecnicos();
-    public List<Tipotecnico> tipos = new List<Tipotecnico>();
+    public List<Tipostecnicos> tipos = new List<Tipostecnicos>();
     private bool Existe = false;
 
     protected override async Task OnInitializedAsync()
