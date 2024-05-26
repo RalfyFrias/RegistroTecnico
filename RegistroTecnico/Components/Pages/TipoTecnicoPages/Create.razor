@@ -1,6 +1,6 @@
 ﻿@page "/TipoTecnico/Create"
 @inject NavigationManager navigationManager
-@inject TipoTecnicoService tipotecnicoService
+@inject TiposTecnicosService tipotecnicoService
 @rendermode InteractiveServer
 
 <PageTitle>Registro de TiposTecnicos</PageTitle>
@@ -22,29 +22,44 @@
 
             <!-- Descripcion -->
             <div class="form-group">
-                <label for="Descripcion">Descripci&oacute;n</label>
-                <InputText id="Descripcion" class="form-control" @bind-Value="tecnico.Descripcion" @oninput="()=> mostrarMensajeError = false" />
-                @if (mostrarMensajeError)
-                {
-                    <d class="text-danger">El campo no está lleno.</d>
-                }
+                <label for="Descripcion">Descripción</label>
+                <InputText id="Descripcion" class="form-control" @bind-Value="tecnico.Descripcion" />
                 <ValidationMessage For="@(() => tecnico.Descripcion)" />
             </div>
-            <!-- volver -->
+
+            <!-- Incentivo -->
+            <div class="form-group">
+                <label for="Incentivo">Incentivo</label>
+                <InputNumber id="Incentivo" class="form-control" @bind-Value="tecnico.Incentivo" />
+                <ValidationMessage For="@(() => tecnico.Incentivo)" />
+            </div>
+
+            <!-- Botones -->
             <div class="text-center">
-                <button type="submit" class="btn btn-primary mx-2">Guardar</button>
-                <NavLink href="/TipoTecnicos/index" class="btn btn-primary mx-2">Volver</NavLink>
+                <button type="submit" class="btn btn-outline-success ml-2">
+                    <span class="bi bi-check-circle-fill"></span> Guardar
+                </button>
+
+                <NavLink href="/TipoTecnicos/index" class="btn btn-outline-danger mx-2">
+                    <span class="bi bi-arrow-bar-left"></span> Retroceder
+                </NavLink>
             </div>
         </div>
+        @mensaje
     </div>
 </EditForm>
 
 @code {
-    private Tipotecnico tecnico = new Tipotecnico();
-    private bool mostrarMensajeError = false; 
+    private Tipostecnicos tecnicos = new Tipostecnicos();
+    public bool Existe = false;
+    public string mensaje;
 
-    private async Task Guardar()
-    { 
+    public async Task Guardar()
+    {
+        if (!await Validar())
+        {
+            return;
+        }
         var guardo = await tipotecnicoService.Guardar(tecnico);
         if (guardo)
         {
@@ -55,16 +70,12 @@
 
     public async Task Nuevo()
     {
-        tecnico = new Tipotecnico();
+        tecnico = new Tipostecnicos();
     }
 
     public async Task<bool> Validar()
     {
-        if (string.IsNullOrWhiteSpace(tecnico.Descripcion))
-            return true; 
-
-        var listaTecnicos = await tipotecnicoService.Listar(t => t.Descripcion.ToLower() == tecnico.Descripcion.ToLower() && t.TipoId != tecnico.TipoId);
-        var Existe = listaTecnicos.Any();
-        return Existe;
+        Existe = await tipotecnicoService.Existe(tecnico.TipoId, tecnico.Descripcion);
+        return !Existe;
     }
 }
