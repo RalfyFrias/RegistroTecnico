@@ -80,7 +80,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        tipos = await tipoTecnicoService.Listar(t => t.TipoId > 0);
+        tipos = await tipoTecnicoService.Listar(t => true);
     }
 
     public void Nuevo()
