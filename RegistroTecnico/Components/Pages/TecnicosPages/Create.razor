@@ -1,8 +1,8 @@
 ﻿@page "/Tecnico/Create"
-@inject TecnicoService tecnicoService
-@inject TiposTecnicosService tipoTecnicoService
+@inject TecnicosService tecnicosService
 @inject NavigationManager navigationManager
 @rendermode InteractiveServer
+@inject TiposTecnicosService tiposTecnicosService
 
 <PageTitle>Registro de T&eacute;cnicos</PageTitle>
 <EditForm Model="tecnico" OnValidSubmit="Guardar">
@@ -80,7 +80,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        tipos = await tipoTecnicoService.Listar(t => true);
+        tipos = await tiposTecnicosService.Listar(t => true);
     }
 
     public void Nuevo()
@@ -92,7 +92,7 @@
     public async Task Buscar()
     {
         Existe = false;
-        var tecnicoEncontrado = await tecnicoService.Buscar(tecnico.TecnicoId);
+        var tecnicoEncontrado = await tecnicosService.Buscar(tecnico.TecnicoId);
 
         if (tecnicoEncontrado != null)
         {
@@ -111,28 +111,28 @@
             return;
         }
 
-        var guardo = await tecnicoService.Guardar(tecnico);
+        var guardo = await tecnicosService.Guardar(tecnico);
         if (guardo)
         {
             Nuevo();
-            navigationManager.NavigateTo("Tecnico/Index");
+            navigationManager.NavigateTo("/Tecnico/index");
         }
     }
 
     public async Task Eliminar()
     {
-        var eliminado = await tecnicoService.Eliminar(tecnico.TecnicoId);
+        var eliminado = await tecnicosService.Eliminar(tecnico.TipoId);
         Nuevo();
     }
 
     private void Retroceder()
     {
-        navigationManager.NavigateTo("Tecnico/Index");
+        navigationManager.NavigateTo("/Tecnico/index");
     }
 
     public async Task<bool> Validar()
     {
-        var listaTecnicos = await tecnicoService.Listar(t => t.Nombre.ToLower() == tecnico.Nombre.ToLower() && t.TecnicoId != tecnico.TecnicoId);
+        var listaTecnicos = await tecnicosService.Listar(t => t.Descripcion.ToLower() == tecnico.Descripcion.ToLower());
         Existe = listaTecnicos.Any();
         return Existe;
     }
