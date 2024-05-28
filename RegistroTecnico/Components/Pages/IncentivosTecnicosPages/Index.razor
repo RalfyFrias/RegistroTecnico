@@ -1,5 +1,5 @@
 ﻿@page "/Incentivostecnicos/index"
-@inject IncentivosTecnicoService incentivostecnicoService
+@inject IncentivosTecnicoService incentivosTecnicosService
 @inject NavigationManager navigationManager
 @rendermode InteractiveServer
 
@@ -101,7 +101,7 @@
     {
         try
         {
-            ListaTecnicos = await incentivostecnicoService.Listar(c => c.IncentivoId > 0);
+            ListaTecnicos = await incentivosTecnicosService.Listar(c => c.IncentivoId > 0);
         }
         catch (Exception ex)
         {
@@ -118,24 +118,24 @@
             {
                 if (filtro == "id" && int.TryParse(valorFiltro, out int IncentivoId))
                 {
-                    ListaTecnicos = await incentivostecnicoService.Listar(t => t.IncentivoId == IncentivoId);
+                    ListaTecnicos = await incentivosTecnicosService.Listar(t => t.IncentivoId == IncentivoId);
                 }
                 else if (filtro == "fecha" && DateTime.TryParse(valorFiltro, out DateTime fecha))
                 {
-                    ListaTecnicos = await incentivostecnicoService.Listar(t => t.Fecha.Date == fecha.Date);
+                    ListaTecnicos = await incentivosTecnicosService.Listar(t => t.Fecha.Date == fecha.Date);
                 }
                 else if (filtro == "descripcion")
                 {
-                    ListaTecnicos = await incentivostecnicoService.Listar(t => t.Descripcion.Contains(valorFiltro));
+                    ListaTecnicos = await incentivosTecnicosService.Listar(t => t.Descripcion.Contains(valorFiltro));
                 }
                 else if (filtro == "monto" && decimal.TryParse(valorFiltro, out decimal monto))
                 {
-                    ListaTecnicos = await incentivostecnicoService.Listar(t => t.Monto == monto);
+                    ListaTecnicos = await incentivosTecnicosService.Listar(t => t.Monto == monto);
                 }
             }
             else
             {
-                ListaTecnicos = await incentivostecnicoService.Listar(p => true);
+                ListaTecnicos = await incentivosTecnicosService.Listar(p => true);
             }
         }
         catch (Exception ex)
