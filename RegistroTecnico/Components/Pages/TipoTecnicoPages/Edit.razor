@@ -1,5 +1,5 @@
 ﻿@page "/TipoTecnico/Edit/{TipoId:int}"
-@inject TiposTecnicoService tiposTecnicosService
+@inject TiposTecnicosService tiposTecnicosService
 @inject NavigationManager navigationManager
 @rendermode InteractiveServer
 
@@ -17,7 +17,7 @@
                     <label for="TipoId" class="form-label">TipoId:</label>
                     <div class="input-group">
                         <div style="width: 40%; height: 1em;">
-                            <InputNumber @bind-Value="tipsotecnicos.TipoId" class="form-control" style="font-size: 0.8em;" />
+                            <InputNumber @bind-Value="tipostecnicos.TipoId" class="form-control" style="font-size: 0.8em;" />
                         </div>
                         <ValidationMessage For="@(() => tipostecnicos.TipoId)" />
                     </div>
