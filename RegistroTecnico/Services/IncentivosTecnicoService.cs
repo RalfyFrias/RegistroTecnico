@@ -20,26 +20,26 @@ namespace RegistroTecnico.Services
 
         public async Task<bool> Existe(int incentivoId)
         {
-            return await Contexto.incentivosTecnicos.AnyAsync(t => t.IncentivoId == incentivoId);
+            return await Contexto.IncentivosTecnicos.AnyAsync(t => t.IncentivoId == incentivoId);
         }
 
 
         public async Task<bool> Existe(string descripcion)
         {
-            return await Contexto.incentivosTecnicos.AnyAsync(t => t.Descripcion.ToLower() == descripcion.ToLower());
+            return await Contexto.IncentivosTecnicos.AnyAsync(t => t.Descripcion.ToLower() == descripcion.ToLower());
         }
 
 
         private async Task<bool> Insertar(IncentivosTecnicos incentivo)
         {
-            Contexto.incentivosTecnicos.Add(incentivo);
+            Contexto.Add(incentivo);
             return await Contexto.SaveChangesAsync() > 0;
         }
 
 
         private async Task<bool> Modificar(IncentivosTecnicos incentivo)
         {
-            Contexto.incentivosTecnicos.Update(incentivo);
+            Contexto.IncentivosTecnicos.Update(incentivo);
             return await Contexto.SaveChangesAsync() > 0;
         }
 
@@ -54,23 +54,23 @@ namespace RegistroTecnico.Services
 
         public async Task<bool> Eliminar(int id)
         {
-            var incentivo = await Contexto.incentivosTecnicos.FindAsync(id);
+            var incentivo = await Contexto.IncentivosTecnicos.FindAsync(id);
             if (incentivo == null)
                 return false;
 
-            Contexto.incentivosTecnicos.Remove(incentivo);
+            Contexto.IncentivosTecnicos.Remove(incentivo);
             return await Contexto.SaveChangesAsync() > 0;
         }
 
 
         public async Task<IncentivosTecnicos?> Buscar(int id)
         {
-            return await Contexto.incentivosTecnicos.AsNoTracking().FirstOrDefaultAsync(t => t.IncentivoId == id);
+            return await Contexto.IncentivosTecnicos.AsNoTracking().FirstOrDefaultAsync(t => t.IncentivoId == id);
         }
 
         public async Task<List<IncentivosTecnicos>> Listar(Expression<Func<IncentivosTecnicos, bool>> criterio)
-        {
-            return await Contexto.incentivosTecnicos.AsNoTracking().Where(criterio).ToListAsync();
+        {   
+            return await Contexto.IncentivosTecnicos.AsNoTracking().Where(criterio).ToListAsync();
         }
     }
 }
