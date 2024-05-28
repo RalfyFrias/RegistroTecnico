@@ -6,7 +6,6 @@ using RegistroTecnico.Service;
 using RegistroTecnico.Services;
 
 
-
 namespace RegistroTecnico
 {
     public class Program
@@ -21,9 +20,8 @@ namespace RegistroTecnico
 
             var ConStr = builder.Configuration.GetConnectionString("ConStr");
             builder.Services.AddDbContext<Contexto>(Options => Options.UseSqlite(ConStr));
-            builder.Services.AddScoped<TecnicosService>();
+            builder.Services.AddScoped<TecnicoService>();
             builder.Services.AddScoped<TiposTecnicosService>();
-            builder.Services.AddScoped<IncentivosTecnicoService>();
 
             builder.Services.AddBlazorBootstrap();
 
