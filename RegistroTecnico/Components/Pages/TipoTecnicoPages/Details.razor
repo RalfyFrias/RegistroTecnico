@@ -42,7 +42,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        tipotecnico = await tiposTecnicosService.Buscar(tipoId);
+        tipotecnico = await tipoTecnicoService.Buscar(tipoId);
     }
     private async Task Volver()
     {
