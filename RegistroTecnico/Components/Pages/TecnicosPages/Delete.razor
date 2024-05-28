@@ -1,5 +1,6 @@
-﻿@page "/Tecnico/Delete/{TecnicoId:int}"
-@inject TecnicoService tecnicoService
+﻿@page "/Tecnico/Delete/"
+@using RegistroTecnico.Service
+@inject TecnicosService tecnicosService
 @inject NavigationManager navigationManager
 @rendermode InteractiveServer
 
@@ -63,7 +64,7 @@
     {
         if (TecnicoId != 0)
         {
-            tecnicos = await tecnicoService.Buscar(TecnicoId);
+            tecnicos = await tecnicosService.Buscar(TecnicoId);
         }
     }
 
@@ -74,7 +75,7 @@
             return;
         }
 
-        if (await tecnicoService.Eliminar(TecnicoId))
+        if (await tecnicosService.Eliminar(TecnicoId))
         {
             Volver();
         }
