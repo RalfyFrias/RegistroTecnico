@@ -5,7 +5,7 @@
 
 <PageTitle>Registro de TiposTecnicos</PageTitle>
 
-<EditForm Model="tecnico" OnValidSubmit="Guardar" formname="crearTipoTecnicoForm">
+<EditForm Model="tecnicos" OnValidSubmit="Guardar" formname="crearTipoTecnicoForm">
     <DataAnnotationsValidator />
 
     <div class="card">
@@ -16,22 +16,22 @@
             <!-- TipoId -->
             <div class="form-group">
                 <label for="TipoId">TipoId</label>
-                <InputNumber id="TipoId" class="form-control" @bind-Value="tecnico.TipoId" />
-                <ValidationMessage For="@(() => tecnico.TipoId)" />
+                <InputNumber id="TipoId" class="form-control" @bind-Value="tecnicos.TipoId" />
+                <ValidationMessage For="@(() => tecnicos.TipoId)" />
             </div>
 
             <!-- Descripcion -->
             <div class="form-group">
                 <label for="Descripcion">Descripción</label>
-                <InputText id="Descripcion" class="form-control" @bind-Value="tecnico.Descripcion" />
-                <ValidationMessage For="@(() => tecnico.Descripcion)" />
+                <InputText id="Descripcion" class="form-control" @bind-Value="tecnicos.Descripcion" />
+                <ValidationMessage For="@(() => tecnicos.Descripcion)" />
             </div>
 
             <!-- Incentivo -->
             <div class="form-group">
                 <label for="Incentivo">Incentivo</label>
-                <InputNumber id="Incentivo" class="form-control" @bind-Value="tecnico.Incentivo" />
-                <ValidationMessage For="@(() => tecnico.Incentivo)" />
+                <InputNumber id="Incentivo" class="form-control" @bind-Value="tecnicos.Incentivo" />
+                <ValidationMessage For="@(() => tecnicos.Incentivo)" />
             </div>
 
             <!-- Botones -->
@@ -50,7 +50,7 @@
 </EditForm>
 
 @code {
-    private Tipostecnicos tecnicos = new Tipostecnicos();
+    private Tipostecnicos tecnicos { get; set; } = new Tipostecnicos();
     public bool Existe = false;
     public string mensaje;
 
@@ -60,7 +60,7 @@
         {
             return;
         }
-        var guardo = await tipotecnicoService.Guardar(tecnico);
+        var guardo = await tipotecnicoService.Guardar(tecnicos);
         if (guardo)
         {
             Nuevo();
@@ -70,12 +70,12 @@
 
     public async Task Nuevo()
     {
-        tecnico = new Tipostecnicos();
+        tecnicos = new Tipostecnicos();
     }
 
     public async Task<bool> Validar()
     {
-        Existe = await tipotecnicoService.Existe(tecnico.TipoId, tecnico.Descripcion);
+        Existe = await tipotecnicoService.Existe(tecnicos.TipoId);
         return !Existe;
     }
 }
