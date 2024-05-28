@@ -1,5 +1,5 @@
 ﻿@page "/Tecnico/index"
-@inject TecnicoService tecnicoService
+@inject TecnicosService tecnicoService
 @inject NavigationManager navigationManager
 
 <PageTitle>Consulta Técnicos</PageTitle>
@@ -33,7 +33,8 @@
         <div class="row">
             <div class="col-md-9"></div>
             <div class="col-md-3 text-end">
-                <a href="/Tecnico/create" class="btn btn-success" type="button">
+                <a href="Tecnico/Create" class="btn btn-success" type="button">
+                    <span class=""></span> Crear 
                     <i class="bi bi-pencil-square"></i>
                 </a>
             </div>
@@ -138,6 +139,6 @@
 
     private void IrEliminar(int tecnicoId)
     {
-        navigationManager.NavigateTo($"/Tecnico/Delete/{tecnicoId}");
+        navigationManager.NavigateTo($"/Tecnico/Delete/");
     }
 }
