@@ -1,9 +1,9 @@
 ﻿@page "/TipoTecnico/Edit/{TipoId:int}"
-@inject TipoTecnicoService tipoTecnicoService
+@inject TiposTecnicoService tiposTecnicosService
 @inject NavigationManager navigationManager
 @rendermode InteractiveServer
 
-<EditForm Model="tipotecnicos" OnValidSubmit="Guardar">
+<EditForm Model="tipostecnicos" OnValidSubmit="Guardar">
     <DataAnnotationsValidator />
     <div class="card">
         <div class="card-header bg-primary text-white text-center py-2 rounded">
@@ -17,9 +17,9 @@
                     <label for="TipoId" class="form-label">TipoId:</label>
                     <div class="input-group">
                         <div style="width: 40%; height: 1em;">
-                            <InputNumber @bind-Value="tipotecnicos.TipoId" class="form-control" style="font-size: 0.8em;" />
+                            <InputNumber @bind-Value="tipsotecnicos.TipoId" class="form-control" style="font-size: 0.8em;" />
                         </div>
-                        <ValidationMessage For="@(() => tipotecnicos.TipoId)" />
+                        <ValidationMessage For="@(() => tipostecnicos.TipoId)" />
                     </div>
                 </div>
             </div>
@@ -27,8 +27,8 @@
             <!-- Descripcion -->
             <div class="mb-3">
                 <label for="Descripcion" class="form-label">Descripción:</label>
-                <InputText @bind-Value="tipotecnicos.Descripcion" class="form-control" />
-                <ValidationMessage For="@(() => tipotecnicos.Descripcion)" />
+                <InputText @bind-Value="tipostecnicos.Descripcion" class="form-control" />
+                <ValidationMessage For="@(() => tipostecnicos.Descripcion)" />
                 @if (Existe)
                 {
                     <p class="text-danger">Ya existe un tipo técnico con esta descripción.</p>
@@ -70,7 +70,7 @@
     public async Task Buscar()
     {
         Existe = false;
-        var tipostecnicosEncontrado = await tipoTecnicoService.Buscar(TipoId);
+        var tipostecnicosEncontrado = await tiposTecnicosService.Buscar(TipoId);
 
         if (tipostecnicosEncontrado != null)
         {
@@ -89,7 +89,7 @@
             return;
         }
 
-        var guardado = await tipoTecnicoService.Guardar(tipostecnicos); 
+        var guardado = await tiposTecnicosService.Guardar(tipostecnicos); 
         if (guardado)
         {
             Nuevo();
@@ -98,7 +98,7 @@
 
     public async Task Eliminar()
     {
-        var eliminado = await tipoTecnicoService.Eliminar(tipotecnicos.TipoId);
+        var eliminado = await tiposTecnicosService.Eliminar(tipostecnicos.TipoId);
         Nuevo();
     }
 
@@ -109,7 +109,7 @@
 
     public async Task<bool> Validar()
     {
-        var listaTipos = await tipoTecnicoService.Listar(t => t.Descripcion.ToLower() == tipotecnicos.Descripcion.ToLower() && t.TipoId != tipotecnicos.TipoId);
+        var listaTipos = await tiposTecnicosService.Listar(t => t.Descripcion.ToLower() == tipostecnicos.Descripcion.ToLower() && t.TipoId != tipostecnicos.TipoId);
         Existe = listaTipos.Any();
         return Existe;
     }
