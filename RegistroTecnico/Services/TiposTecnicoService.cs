@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RegistroTecnico.DAL;
-using RegistroTecnico.Migrations;
 using RegistroTecnico.Models;
 using System.Linq.Expressions;
 using System.Xml.Linq;
@@ -17,57 +16,57 @@ namespace RegistroTecnico.Services
         }
 
         // Método Existente
-        public async Task<bool> Existe(int Tecnicos)
+        public async Task<bool> Existe(int tipostecnicos)
         {
-            return await _contexto.Tecnicos.AnyAsync(t => t.TipoId == Tecnicos);
+            return await _contexto.Tecnicos.AnyAsync(t => t.TipoId == tipostecnicos);
         }
 
         // Método Insertar
-        private async Task<bool> Insertar(Tecnicos tecnico)
+        private async Task<bool> Insertar(Tipostecnicos tipostecnicos)
         {
-            _contexto.Tecnicos.Add(tecnico);
+            _contexto.TiposTecnicos.Add(tipostecnicos);
             return await _contexto.SaveChangesAsync() > 0;
         }
 
         // Método Modificar
-        private async Task<bool> Modificar(Tecnicos tecnico)
+        private async Task<bool> Modificar(Tipostecnicos tipostecnicos)
         {
-            _contexto.Tecnicos.Update(tecnico);
+            _contexto.TiposTecnicos.Update(tipostecnicos);
             return await _contexto.SaveChangesAsync() > 0;
         }
 
         // Método guardar
-        public async Task<bool> Guardar(Tecnicos tecnico)
+        public async Task<bool> Guardar(Tipostecnicos tipostecnicos)
         {
-            if (!await Existe(tecnico.TipoId))
-                return await Insertar(tecnico);
+            if (!await Existe(tipostecnicos.TipoId))
+                return await Insertar(tipostecnicos);
             else
-                return await Modificar(tecnico);
+                return await Modificar(tipostecnicos);
         }
 
         // Método eliminar
         public async Task<bool> Eliminar(int id)
         {
-            var Tecnicos = await _contexto.Tecnicos.FindAsync(id);
+            var Tecnicos = await _contexto.TiposTecnicos.FindAsync(id);
             if (Tecnicos == null)
                 return false;
 
-            _contexto.Tecnicos.Remove(Tecnicos);
+            _contexto.TiposTecnicos.Remove(Tecnicos);
             return await _contexto.SaveChangesAsync() > 0;
         }
 
         // Método buscar
-        public async Task<Tecnicos?> Buscar(int id)
+        public async Task<Tipostecnicos?> Buscar(int id)
         {
-            return await _contexto.Tecnicos
+            return await _contexto.TiposTecnicos
                 .AsNoTracking()
                 .FirstOrDefaultAsync(t => t.TipoId == id);
         }
 
         // Método listar
-        public async Task<List<Tecnicos>> Listar(Expression<Func<Tecnicos, bool>> criterio)
+        public async Task<List<Tipostecnicos>> Listar(Expression<Func<Tipostecnicos, bool>> criterio)
         {
-            return await _contexto.Tecnicos
+            return await _contexto.TiposTecnicos
                 .AsNoTracking()
                 .Where(criterio)
                 .ToListAsync();

@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RegistroTecnico.Migrations;
+
 using RegistroTecnico.Models;
 using RegistroTecnico.Services;
 
@@ -13,6 +13,6 @@ namespace RegistroTecnico.DAL
 
 	  public DbSet<Tecnicos> Tecnicos { get; set;}
       public DbSet<Tipostecnicos> TiposTecnicos { get; set; }
-	  public DbSet<IncentivosTecnicos> incentivosTecnicos { get; set; }
+	  public DbSet<IncentivosTecnicos> IncentivosTecnicos{ get; set; }
     }
 } 

@@ -5,11 +5,11 @@ using System.Linq.Expressions;
 
 namespace RegistroTecnico.Service;
 
-public class TecnicoService
+public class TecnicosService
 {
     private readonly Contexto Contexto;
 
-    public TecnicoService(Contexto contexto)
+    public TecnicosService(Contexto contexto)
     {
         Contexto = contexto;
     }
