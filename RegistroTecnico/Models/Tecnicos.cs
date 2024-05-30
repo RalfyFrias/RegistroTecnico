@@ -15,12 +15,12 @@ namespace RegistroTecnico.Models
         [Required(ErrorMessage = "El Campo Descripción es obligatorio")]
         public float? Sueldohora { get; set; }
 
-        [ForeignKey("TipoTecnico")]
+        [ForeignKey("TipoId")]
         public int TipoId { get; set; }
 
         public int IncentivoId { get; set; }
 
-        public Tipostecnicos? Tipotecnicos { get; set;}
+        public Tipostecnicos? Tipotecnicos { get; set; }
 
         public string Descripcion { get; set; }
     }
