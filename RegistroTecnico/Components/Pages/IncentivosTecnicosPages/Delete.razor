@@ -1,4 +1,4 @@
-﻿@page "/IncentivoTecnico/Delete/{TipoId:int}"
+﻿@page "/IncentivoTecnico/Delete/{IncentivoId:int}"
 
 @inject IncentivosTecnicoService incentivostecnicoService
 @inject NavigationManager navigationManager
@@ -55,25 +55,25 @@
 
 @code {
     [Parameter]
-    public int TipoId { get; set; }
+    public int IncentivoId { get; set; }
     public IncentivosTecnicos? tecnico { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        if (TipoId != 0)
+        if (IncentivoId != 0)
         {
-            tecnico = await incentivostecnicoService.Buscar(TipoId);
+            tecnico = await incentivostecnicoService.Buscar(IncentivoId);
         }
     }
 
     public async Task EliminarTipoTecnico()
     {
-        if (TipoId == 0 || tecnico == null)
+        if (IncentivoId == 0 || tecnico == null)
         {
             return;
         }
 
-        if (await incentivostecnicoService.Eliminar(TipoId))
+        if (await incentivostecnicoService.Eliminar(IncentivoId))
         {
             Volver();
         }
