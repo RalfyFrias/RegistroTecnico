@@ -22,6 +22,7 @@
                                 <li><strong>Nombre:</strong> @tecnico.Nombre</li>
                                 <li><strong>SueldoHora:</strong> @tecnico.Sueldohora</li>
                                 <li><strong>Tipo Técnico:</strong> @tipoDescripcion</li>
+                                <li><strong>Descripción:</strong> @tecnico.Descripcion</li>
                             </ul>
                         </div>
                     </div>
@@ -47,7 +48,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         tecnico = await tecnicoService.Buscar(TecnicoId);
-        if(tecnico != null )
+        if (tecnico != null)
         {
             //var tipo = await tipoTecnicoService
         }
