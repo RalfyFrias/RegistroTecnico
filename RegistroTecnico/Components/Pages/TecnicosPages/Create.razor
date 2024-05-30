@@ -26,7 +26,7 @@
                 </div>
             </div>
 
-               @* Nombre *@
+            @* Nombre *@
             <div class="mb-3">
                 <label for="Nombres" class="form-label">Nombre:</label>
                 <InputText @bind-Value="tecnico.Nombre" class="form-control" />
@@ -40,9 +40,9 @@
             @* Tipo Tecnico *@
             <div class="mb-3">
                 <label> Tipo Tecnico </label>
-                <InputSelect @bind-Value="tecnico.TipoId" class="form-select" >
+                <InputSelect @bind-Value="tecnico.TipoId" class="form-select">
                     <option value="0">Seleccione un tipo de tecnico</option>
-                    @foreach(var tipo in tipos)
+                    @foreach (var tipo in tipos)
                     {
                         <option value="@tipo.TipoId">@tipo.Descripcion</option>
                     }
@@ -51,11 +51,17 @@
                 </InputSelect>
             </div>
 
-              @* SueldoHora *@
+            @* SueldoHora *@
             <div class="mb-3">
                 <label> SueldoHora </label>
                 <InputNumber @bind-Value="tecnico.Sueldohora" class="form-control" />
                 <ValidationMessage For="@(() => tecnico.Sueldohora)" />
+            </div>
+            <!-- Descripcion -->
+            <div class="mb-3">
+                <label for="Descripcion" class="form-label">Descripción:</label>
+                <InputText @bind-Value="tecnico.Descripcion" class="form-control" />
+                <ValidationMessage For="@(() => tecnico.Descripcion)" />
             </div>
         </div>
 
