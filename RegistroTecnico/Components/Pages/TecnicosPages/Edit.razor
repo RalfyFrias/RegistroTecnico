@@ -12,7 +12,7 @@
         </div>
 
         <div class="card-body">
-            
+
             <div class="row">
 
                 <div class="col-md-6 mb-3">
@@ -41,6 +41,11 @@
                 <InputNumber @bind-Value="tecnico.Sueldohora" class="form-control" />
                 <ValidationMessage For="@(() => tecnico.Sueldohora)" />
             </div>
+            <div class="mb-3">
+                <label for="Descripcion" class="form-label">Descripción:</label>
+                <InputText @bind-Value="tecnico.Descripcion" class="form-control" />
+                <ValidationMessage For="@(() => tecnico.Descripcion)" />
+            </div>
         </div>
 
         <div class="card-footer bg-light d-flex justify-content-center mt-3">
@@ -50,6 +55,7 @@
                 <button type="button" href="Create" @onclick="Retroceder"><span class="bi bi-arrow-bar-left"></span> Retroceder </button>
             </div>
         </div>
+
     </div>
 </EditForm>
 
@@ -67,7 +73,7 @@
         }
     }
 
-    public async Task  Nuevo()
+    public async Task Nuevo()
     {
         tecnico = new Tecnicos();
         Existe = false;
