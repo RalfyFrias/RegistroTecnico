@@ -1,4 +1,4 @@
-﻿@page "/Tecnico/Delete/"
+﻿@page "/Tecnico/Delete/{TecnicoId:int}"
 @using RegistroTecnico.Service
 @inject TecnicosService tecnicosService
 @inject NavigationManager navigationManager
@@ -32,6 +32,7 @@
                                                 <li><strong>TecnicoId:</strong> @tecnicos.TecnicoId</li>
                                                 <li><strong>Nombre:</strong> @tecnicos.Nombre</li>
                                                 <li><strong>SueldoHora:</strong> @tecnicos.Sueldohora</li>
+                                                <li><strong>Descripcion:</strong>@tecnicos.Descripcion</li>
                                             </ul>
                                         </div>
                                     </div>
