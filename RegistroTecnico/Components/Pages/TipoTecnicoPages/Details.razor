@@ -1,4 +1,4 @@
-﻿@page "/TipoTecnico/Details/"
+﻿@page "/TipoTecnico/Details/{TipoId:int}"
 @inject TiposTecnicosService tiposTecnicosService
 @inject NavigationManager navigationManager
 @rendermode InteractiveServer
@@ -42,7 +42,7 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        tipotecnico = await tipoTecnicoService.Buscar(tipoId);
+        tipotecnico = await tiposTecnicosService.Buscar(tipoId);
     }
     private async Task Volver()
     {
