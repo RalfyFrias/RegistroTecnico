@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RegistroTecnico.Models;
 using RegistroTecnico.DAL;
+using RegistroTecnico.Migrations;
 using System.Linq.Expressions;
 
 namespace RegistroTecnico.Service;
