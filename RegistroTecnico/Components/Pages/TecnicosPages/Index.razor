@@ -1,5 +1,6 @@
 ﻿@page "/Tecnico/index"
 @inject TecnicosService tecnicoService
+@inject TiposTecnicosService tiposTecnicosService
 @inject NavigationManager navigationManager
 
 <PageTitle>Consulta Técnicos</PageTitle>
@@ -15,7 +16,7 @@
             <select @bind="filtro" class="form-select">
                 <option value="id">ID</option>
                 <option value="nombre">Nombre</option>
-                <option value="diascompromiso">Tipo técnico</option>
+                <option value="tipo">Tipo técnico</option>
             </select>
         </div>
         <div class="col-md-6">
@@ -34,7 +35,7 @@
             <div class="col-md-9"></div>
             <div class="col-md-3 text-end">
                 <a href="Tecnico/Create" class="btn btn-success" type="button">
-                    <span class=""></span> Crear 
+                    <span class=""></span> Crear
                     <i class="bi bi-pencil-square"></i>
                 </a>
             </div>
@@ -47,6 +48,7 @@
                 <tr>
                     <th>TécnicoId</th>
                     <th>Nombre</th>
+                    <th>Descripción</th>
                     <th>Tipo Técnico</th>
                     <th>SueldoHora</th>
                     <th>Detalle</th>
@@ -57,11 +59,12 @@
             <tbody>
                 @foreach (var t in ListaTecnicos)
                 {
+                    var tipo = TiposList.FirstOrDefault(tp => tp.TipoId == t.TipoId);
                     <tr>
                         <td>@t.TecnicoId</td>
                         <td>@t.Nombre</td>
-                        <td>@t.Tipotecnicos!.Descripcion</td>
-                        <td>@t.TipoId</td>
+                        <td>@t.Descripcion</td>
+                        <td>@(tipo != null ? tipo.Descripcion : "nO ENCONTRADO") </td>
                         <td>@t.Sueldohora</td>
                         <td>
                             <a href="/Tecnico/Details/@t.TecnicoId" style="border: none; background-color: transparent;" class="btn-detalle">
@@ -75,7 +78,7 @@
                         </td>
                         <td>
                             <a href="/Tecnico/Delete/@t.TecnicoId" style="border: none; background-color: transparent;" class="btn-eliminar">
-                              <span class="bi bi-dash-circle-fill" style="font-size: 2rem;"></span>
+                                <span class="bi bi-dash-circle-fill" style="font-size: 2rem;"></span>
                             </a>
                         </td>
                     </tr>
@@ -90,6 +93,7 @@
 
 @code {
     public List<Tecnicos> ListaTecnicos { get; set; } = new List<Tecnicos>();
+    public List<Tipostecnicos> TiposList { get; set; } = new List<Tipostecnicos>();
     private string filtro = "id";
     private string valorFiltro;
 
@@ -97,6 +101,7 @@
     {
         try
         {
+            TiposList = await tiposTecnicosService.Listar(tp => tp.TipoId > 0);
             ListaTecnicos = await tecnicoService.Listar(t => t.TecnicoId > 0);
         }
         catch (Exception ex)
@@ -120,7 +125,7 @@
                 {
                     ListaTecnicos = await tecnicoService.Listar(t => t.Nombre.Contains(valorFiltro, StringComparison.OrdinalIgnoreCase));
                 }
-                else if (filtro == "diascompromiso" && int.TryParse(valorFiltro, out int TipoId))
+                else if (filtro == "tipo" && int.TryParse(valorFiltro, out int TipoId))
                 {
                     ListaTecnicos = await tecnicoService.Listar(t => t.TipoId == TipoId);
                 }
