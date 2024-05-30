@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RegistroTecnico.DAL;
+using RegistroTecnico.Migrations;
 using RegistroTecnico.Models;
 using System.Linq.Expressions;
 using System.Xml.Linq;
